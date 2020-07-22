@@ -92,9 +92,31 @@ export default {
         //  done: false
         // },
       ],
+      // showComplete: false
     }
   },
+
+  mounted() {
+    this.getTodos();
+  },
+  watch: {
+    tasks: {
+      handler: function(updatedList) {
+        localStorage.setItem('tasks', JSON.stringify(updatedList));
+      },
+      deep: true
+    }
+  },
+
+
+
   methods: {
+    getTodos() {
+      if (localStorage.getItem('tasks')) {
+        this.tasks = JSON.parse(localStorage.getItem('tasks'));
+      }
+    },
+
     deleteTask(index) {
        this.$q.dialog({
         title: 'Excluir tarefa',
@@ -102,13 +124,16 @@ export default {
         cancel: true,
         persistent: true
       }).onOk(() => {
-        this.tasks.splice(index, 1);
+        this.tasks.splice(this.tasks.indexOf(index), 1);
+        // this.todoList.splice(this.todoList.indexOf(item), 1);
         this.$q.notify('Tarefa excluida')
       })
     },
+
     addTask(){
       console.log('addTask')
-      this.tasks.push({
+      this.tasks.unshift({
+        id: this.tasks.length,
         title: this.newTask,
         done: false,
       })
@@ -116,6 +141,10 @@ export default {
     }
   }
 }
+
+
+
+
 </script>
 
 
