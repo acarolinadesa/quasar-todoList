@@ -21,5 +21,13 @@ quasar dev
 quasar build
 ```
 
+### Build Cordova app
+```
+yarn install -g cordova
+quasar mode -a cordova
+quasar build -m cordova -T android
+cordova build
+```
+
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
