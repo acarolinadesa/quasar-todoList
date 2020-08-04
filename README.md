@@ -26,6 +26,8 @@ quasar build
 yarn install -g cordova
 quasar mode -a cordova
 quasar build -m cordova -T android
+
+cd src-cordova 
 cordova build
 ```
 
